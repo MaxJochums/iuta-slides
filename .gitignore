@@ -1,0 +1,9 @@
+# Local Python environment
+.venv/
+
+# Generated local MkDocs staging files
+docs/index.md
+docs/presentations/
+docs/template/
+site/
+tmp/
