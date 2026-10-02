@@ -7,3 +7,6 @@ docs/presentations/
 docs/template/
 site/
 tmp/
+
+# Local slides access secret (never commit)
+.env.slides
