@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!--
+    START HERE: set the presentation metadata before editing the slides below.
+    These values populate the title slide, footer, document title, and final slide.
+  -->
+  <meta name="author" content="Max Jochums">
+    <meta name="author-email" content="jochums@iuta.de">
+    <meta name="presentation-title" content="Konnektivität als Schlüssel für einen nahtlosen Datenfluss">
+    <meta name="presentation-date" content="2026-11-03">
+    <meta name="presentation-event" content="Fachtagung 'Digitales Labor'">
+    <meta name="presentation-affiliation" content="IUTA e.V.">
+    <meta name="presentation-thank-you" content="Thank you for your attention">
+    <meta name="presentation-thank-you-subtitle" content="">
+    <meta name="presentation-project-link" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="../assets/template/vendor/reveal.js/reset.css">
+  <link rel="stylesheet" href="../assets/template/vendor/reveal.js/reveal.css">
+  <link rel="stylesheet" href="../assets/template/vendor/reveal.js/white.css">
+  <link rel="stylesheet" href="../assets/template/vendor/highlight.js/atom-one-dark.min.css">
+  <link rel="stylesheet" href="../assets/template/template.css">
+  <link rel="stylesheet" href="../assets/template/layouts.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- Metadata is defined at the top of this file. Keep the structure. -->
+      <section id="title-slide" class="quarto-title-block">
+        <img class="banner-background" src="../assets/template/title-background.jpg" alt="">
+        <h1 class="title"></h1>
+        <div class="title-date"></div>
+        <div class="title-event"></div>
+        <div class="title-speakers"></div>
+        <div class="title-affiliations"></div>
+        <div class="title-logo iuta" aria-hidden="true"></div>
+        <div class="title-logo ude" aria-hidden="true"></div>
+        <div class="title-logo jrf" aria-hidden="true"></div>
+      </section>
+
+
+      <!--
+        MARK: START SLIDES HERE (added via chat workflow).
+        Add slides as <section class="slide">...</section> below.
+      -->
+
+      <!-- Slide 2: Bridge to the previous speaker -->
+      <section class="slide" id="slide-bridge-previous-speaker">
+        <h2>Step by step</h2>
+        <div class="slide-body">
+          <div class="text-image-layout text-image-half">
+            <div class="layout-text">
+              <p>We just heard how complex and expensive lab connectivity still is.</p>
+              <p>Too many systems. No interfaces. Data islands.</p>
+              <div class="callout">
+                <div>That is exactly why standards matter —</div>
+                <div>and we already put them into practice.</div>
+              </div>
+            </div>
+            <img src="assets/connectivity.png" alt="Mind map of many disconnected lab software systems">
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Custom integration - the hard way (one interface per device) -->
+      <section class="slide" id="slide-custom-integration" data-auto-animate data-auto-animate-duration="1.1">
+        <h2 data-id="ci-h2">Custom integration — the hard way</h2>
+        <div class="slide-body">
+          <div class="ci-layout">
+            <div class="ci-cards">
+              <div class="iface-grid">
+                <div class="iface-card iface-blue">
+                  <div class="iface-head">REST API</div>
+                  <img data-id="dev-1" src="assets/dev_label_printer.png" alt="Label printer with REST integration">
+                  <div class="iface-devices">Label printer · mobile app · cloud services</div>
+                </div>
+                <div class="iface-card iface-green">
+                  <div class="iface-head">CSV file / USB stick</div>
+                  <img data-id="dev-2" src="assets/dev_workbench.png" alt="Clean bench transferring data via CSV file on a USB stick">
+                  <div class="iface-devices">Clean bench · manual export · sneakernet</div>
+                </div>
+                <div class="iface-card iface-yellow">
+                  <div class="iface-head">Serial connection / ConBox</div>
+                  <img data-id="dev-3" src="assets/dev_balance.png" alt="Balance connected via serial adapter">
+                  <div class="iface-devices">Balance · sensor box · legacy instruments</div>
+                </div>
+                <div class="iface-card iface-grey">
+                  <div class="iface-head">Proprietary protocol</div>
+                  <img data-id="dev-4" src="assets/dev_robot.png" alt="Liquid handling robot with proprietary protocol">
+                  <div class="iface-devices">Liquid handler · pipetting robot</div>
+                </div>
+              </div>
+            </div>
+            <div class="ci-arrow" data-id="ci-arrow">→</div>
+            <div class="target-box" data-id="target-box">Higher-level systems<div class="target-sub">LIMS · ELN · LES</div></div>
+          </div>
+          <div class="callout">Every device its own driver, its own project, its own cost.</div>
+        </div>
+        <style>
+          #slide-custom-integration .ci-layout,
+          #slide-lads .ci-layout {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+            margin-bottom: 1.1em;
+          }
+          .ci-cards { flex: 1 1 auto; min-width: 0; }
+          .iface-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+          }
+          .iface-card {
+            border-radius: 18px;
+            color: #274560;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 18px 12px;
+          }
+          .iface-head { font-weight: 700; font-size: .95em; margin-bottom: 6px; text-align: center; }
+          .iface-card img { height: 128px; width: auto; max-width: 100%; object-fit: contain; margin: 0; }
+          .iface-devices { font-size: .6em; margin-top: 6px; line-height: 1.3; text-align: center; }
+          .iface-blue { background: #cfe0f2; }
+          .iface-green { background: #cfe6d4; }
+          .iface-yellow { background: #fbe6b4; }
+          .iface-grey { background: #d9dcdf; }
+          .ci-arrow { flex: 0 0 auto; font-size: 2.6em; color: var(--blue); font-weight: 700; }
+          .target-box {
+            flex: 0 0 auto;
+            width: 400px;
+            background: #004c93;
+            color: #fff;
+            border-radius: 16px;
+            padding: 26px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.05em;
+          }
+          .target-box .target-sub { font-size: .62em; font-weight: 400; opacity: .85; margin-top: 6px; }
+
+          /* Slide 4: the four interfaces merge into one LADS box */
+          #slide-lads .lads-merge-card {
+            background: #ffffff;
+            border: 2px solid #004c93;
+            border-radius: 18px;
+            padding: 26px 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+          }
+          #slide-lads .lads-logo { height: 120px; width: auto; margin: 0; }
+          #slide-lads .dev-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 26px;
+          }
+          #slide-lads .dev-row img { height: 105px; width: auto; object-fit: contain; margin: 0; }
+        </style>
+      </section>
+
+      <!-- Slide 4: one standard (LADS) - the four devices merge into one box -->
+      <section class="slide" id="slide-lads" data-auto-animate data-auto-animate-duration="1.1">
+        <h2 data-id="ci-h2">One standard — LADS</h2>
+        <div class="slide-body">
+          <div class="ci-layout">
+            <div class="ci-cards">
+              <div class="lads-merge-card">
+                <img class="lads-logo" src="assets/lads_logo.png" alt="LADS — Laboratory &amp; Analytical Device Standard">
+                <div class="dev-row">
+                  <img data-id="dev-1" src="assets/dev_label_printer.png" alt="Label printer">
+                  <img data-id="dev-2" src="assets/dev_workbench.png" alt="Clean bench">
+                  <img data-id="dev-3" src="assets/dev_balance.png" alt="Balance">
+                  <img data-id="dev-4" src="assets/dev_robot.png" alt="Liquid handler">
+                </div>
+              </div>
+            </div>
+            <div class="ci-arrow" data-id="ci-arrow">→</div>
+            <div class="target-box" data-id="target-box">Higher-level systems<div class="target-sub">LIMS · ELN · LES</div></div>
+          </div>
+          <div class="callout">One protocol, every device — no custom work per instrument.</div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Practice example - Vacuubrand pump integrated into the Waldner LCC via LADS -->
+      <section class="slide" id="slide-practice-intro">
+        <h2>Plug and produce — a real integration</h2>
+        <div class="slide-body">
+          <div class="pw-visual">
+            <figure class="pw-node">
+              <img src="assets/spe_controller_placeholder.jpg" alt="Vacuubrand vacuum controller">
+              <figcaption>Vacuubrand vacuum controller</figcaption>
+            </figure>
+            <div class="pw-link"><span class="pw-badge">LADS · OPC UA</span><span class="pw-arrow">→</span></div>
+            <figure class="pw-node">
+              <img src="assets/lcc_dashboard.png" alt="Waldner LCC dashboard">
+              <figcaption>Waldner LCC</figcaption>
+            </figure>
+          </div>
+          <div class="pw-text">
+            <p>A Vacuubrand vacuum pump with its controller — integrated through <strong>LADS (OPC UA)</strong> into the Waldner LCC as the higher-level system.</p>
+          </div>
+        </div>
+        <style>
+          #slide-practice-intro .pw-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: .8em;
+          }
+          #slide-practice-intro .pw-node {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+          }
+          #slide-practice-intro .pw-node img {
+            height: 470px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin: 0;
+          }
+          #slide-practice-intro .pw-node figcaption {
+            font-size: .62em;
+            color: #274560;
+            text-align: center;
+            font-weight: 700;
+          }
+          #slide-practice-intro .pw-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+          }
+          #slide-practice-intro .pw-badge {
+            background: #004c93;
+            color: #fff;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: .62em;
+            font-weight: 700;
+            white-space: nowrap;
+          }
+          #slide-practice-intro .pw-arrow { font-size: 3em; color: var(--blue); font-weight: 700; }
+          #slide-practice-intro .pw-text { text-align: center; }
+          #slide-practice-intro .pw-text p { margin: 0 auto .6em; max-width: 42ch; }
+          #slide-practice-intro .callout { display: inline-block; margin-top: 0; }
+        </style>
+      </section>
+
+      <!-- Placeholder slide: reserved (content to come) -->
+      <section class="slide" id="slide-placeholder-spe">
+        <h2></h2>
+        <div class="slide-body">
+          <div class="ph-empty">
+            <p class="ph-hint">Platzhalter — Inhalt folgt</p>
+          </div>
+        </div>
+        <style>
+          #slide-placeholder-spe .slide-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          #slide-placeholder-spe .ph-empty {
+            width: 100%;
+            height: 70%;
+            border: 3px dashed #c8d9ea;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          #slide-placeholder-spe .ph-hint {
+            color: #a8b6c4;
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: .04em;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 6: Use case - Solid Phase Extraction (SPE) with the Vacuubrand pump -->
+      <section class="slide" id="slide-spe-usecase">
+        <h2>Use case — Solid Phase Extraction (SPE)</h2>
+        <div class="slide-body">
+          <div class="spe-layout">
+            <div class="spe-text">
+              <p>SPE run with various vacuum programs.</p>
+              <p>Directly controlled through <strong>LADS</strong>.</p>
+              <div class="callout">Manual documentation is gone</div>
+            </div>
+            <figure class="spe-figure">
+              <img src="assets/spe_controller_placeholder.jpg" alt="Vacuubrand vacuum controller during an SPE run">
+              <figcaption>Vacuum controller during an SPE run</figcaption>
+            </figure>
+          </div>
+        </div>
+        <style>
+          #slide-spe-usecase .spe-layout {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+          }
+          #slide-spe-usecase .spe-text { flex: 1 1 42%; min-width: 0; }
+          #slide-spe-usecase .spe-figure {
+            flex: 1 1 58%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+          }
+          #slide-spe-usecase .spe-figure img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            margin: 0;
+          }
+          #slide-spe-usecase .spe-figure figcaption {
+            font-size: .5em;
+            color: #7a8b9c;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 7: Waldner LCC - design philosophy -->
+      <section class="slide" id="slide-waldner-lcc">
+        <h2>Waldner LCC — Central Data Hub</h2>
+        <div class="slide-body">
+          <div class="lcc-layout">
+            <div class="lcc-text">
+              <ul class="lcc-points">
+                <li>Basic monitoring functionality</li>
+                <li>High visual clarity</li>
+                <li>Only one view needed</li>
+              </ul>
+              <div class="callout">Solid, dependable core — but the real treasure lies elsewhere.</div>
+            </div>
+            <figure class="lcc-figure">
+              <img src="assets/lcc_dashboard.png" alt="Waldner LCC dashboard">
+            </figure>
+          </div>
+        </div>
+        <style>
+          #slide-waldner-lcc .lcc-layout {
+            display: flex;
+            align-items: center;
+            gap: 44px;
+          }
+          #slide-waldner-lcc .lcc-text { flex: 1 1 38%; min-width: 0; }
+          #slide-waldner-lcc .lcc-points {
+            font-size: 1.05em;
+            line-height: 1.9;
+          }
+          #slide-waldner-lcc .lcc-figure {
+            flex: 1 1 62%;
+            margin: 0;
+          }
+          #slide-waldner-lcc .lcc-figure img {
+            width: 100%;
+            max-height: 640px;
+            object-fit: contain;
+            margin: 0;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 8: LADS OPC proxy server - every connected device appears as one device -->
+      <section class="slide" id="slide-lads-proxy">
+        <h2>LADS OPC Proxy Server</h2>
+        <div class="slide-body">
+          <div class="px-layout">
+            <div class="px-text">
+              <p>Explorer view of the proxy server — every device connected to the LCC shows up here as a device.</p>
+              <p>One integration layer in front of everything.</p>
+              <div class="callout">Only one integration needed!</div>
+            </div>
+            <figure class="px-figure">
+              <img src="assets/lads_proxy_explorer.png" alt="LADS OPC proxy server explorer view">
+            </figure>
+          </div>
+        </div>
+        <style>
+          #slide-lads-proxy .px-layout {
+            display: flex;
+            align-items: center;
+            gap: 44px;
+          }
+          #slide-lads-proxy .px-text { flex: 1 1 auto; min-width: 0; }
+          #slide-lads-proxy .px-figure {
+            flex: 0 0 auto;
+            margin: 0 0 0 auto;
+            display: flex;
+            justify-content: flex-end;
+          }
+          #slide-lads-proxy .px-figure img {
+            height: 840px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin: 0;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 10: Legacy devices - the LADSCESSIBLE project -->
+      <section class="slide" id="slide-ladscessible">
+        <h2>What about legacy devices?</h2>
+        <div class="slide-body">
+          <div class="lc-layout">
+            <div class="lc-pillars">
+              <div class="lc-pillar">
+                <div class="lc-num">1</div>
+                <div class="lc-body">
+                  <h3>Central LADS Knowledge Base</h3>
+                  <p>Machine-readable repository of LADS OPC UA specifications, device manuals and integration examples — the structured foundation for automated model generation.</p>
+                </div>
+              </div>
+              <div class="lc-pillar">
+                <div class="lc-num">2</div>
+                <div class="lc-body">
+                  <h3>Orchestrated AI Agent System</h3>
+                  <p>Specialized LLM agents for tutorials, data collection and information-model generation — minimal user interaction, maximum dark processing rate.</p>
+                </div>
+              </div>
+              <div class="lc-pillar">
+                <div class="lc-num">3</div>
+                <div class="lc-body">
+                  <h3>Modular Gateway Hardware</h3>
+                  <p>Plug-and-play gateway modules (RS232, Modbus, USB, 4G, battery) with automatic detection. Raspberry Pi CM5 as the computing unit.</p>
+                  <p class="lc-deploy"><strong>Automated deployment:</strong> AI-generated LADS OPC UA models (XML/JSON) pushed straight to the gateway via Node-RED — no IT specialists, 10× faster than manual integration.</p>
+                </div>
+              </div>
+            </div>
+            <div class="lc-aside">
+              <img class="lc-logotype" src="assets/ladscessible_wordmark.png" alt="LADSCESSIBLE">
+              <img class="lc-icon" src="assets/ladscessible_icon.png" alt="Modular AI gateway icon">
+              <p class="lc-caption">Modular AI Gateway for Brownfield Laboratory Devices</p>
+            </div>
+          </div>
+          <div class="lc-funded">
+            <span>Funded by</span>
+            <img src="assets/zim_logo.png" alt="ZIM — Zentrales Innovationsprogramm Mittelstand">
+          </div>
+        </div>
+        <style>
+          #slide-ladscessible .lc-layout {
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
+          }
+          #slide-ladscessible .lc-pillars {
+            flex: 1 1 64%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 0;
+          }
+          #slide-ladscessible .lc-pillar {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+          }
+          #slide-ladscessible .lc-num {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: #1e9e57;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          #slide-ladscessible .lc-body h3 {
+            margin: 0 0 4px;
+            color: #004c93;
+            font-size: .82em;
+          }
+          #slide-ladscessible .lc-body p {
+            margin: 0;
+            font-size: .6em;
+            line-height: 1.4;
+            color: #40566b;
+          }
+          #slide-ladscessible .lc-deploy {
+            margin-top: 6px !important;
+            border-left: 4px solid #1e9e57;
+            padding-left: 10px;
+          }
+          #slide-ladscessible .lc-aside {
+            flex: 1 1 36%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 14px;
+            border: 1px solid #dce8f1;
+            border-radius: 18px;
+            padding: 22px;
+          }
+          #slide-ladscessible .lc-logotype { width: 84%; max-height: 62px; object-fit: contain; margin: 0; }
+          #slide-ladscessible .lc-icon { width: 120px; height: 120px; object-fit: contain; margin: 0; }
+          #slide-ladscessible .lc-caption {
+            margin: 0;
+            font-size: .6em;
+            font-weight: 700;
+            color: #2b6cb0;
+            line-height: 1.4;
+          }
+          #slide-ladscessible .lc-funded {
+            position: absolute;
+            top: calc(var(--top-rule) + 8px);
+            right: var(--side-gap);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 3;
+          }
+          #slide-ladscessible .lc-funded span { font-size: .5em; color: #90a0b0; }
+          #slide-ladscessible .lc-funded img { height: 60px; width: auto; object-fit: contain; margin: 0; }
+        </style>
+      </section>
+
+      <!-- Slide 11: Custom vibe coding - building our own tools on open interfaces -->
+      <section class="slide" id="slide-vibe-coding">
+        <h2>Custom vibe coding</h2>
+        <div class="slide-body">
+          <div class="px-layout">
+            <div class="px-text">
+              <p>The LADS proxy and its REST API are the foundation — so we build our own tools on top.</p>
+              <p>No vendor lock-in: the interface is open, anyone can extend it.</p>
+              <div class="callout">Open interfaces invite custom tools.</div>
+            </div>
+            <figure class="px-figure">
+              <img src="assets/lcc_tools.png" alt="IUTA LCC Tools dashboard">
+            </figure>
+          </div>
+        </div>
+        <style>
+          #slide-vibe-coding .px-layout {
+            display: flex;
+            align-items: center;
+            gap: 44px;
+          }
+          #slide-vibe-coding .px-text { flex: 0 0 26%; min-width: 0; }
+          #slide-vibe-coding .px-figure { flex: 1 1 74%; margin: 0; }
+          #slide-vibe-coding .px-figure img {
+            width: 100%;
+            max-height: 660px;
+            object-fit: contain;
+            margin: 0;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 12: Use case - usage analysis and high-resolution power data -->
+      <section class="slide" id="slide-use-case-analysis">
+        <h2>Use case — usage analysis &amp; power monitoring</h2>
+        <div class="slide-body">
+          <div class="px-layout">
+            <div class="px-text">
+              <p>Every connected device reports its power draw at high resolution.</p>
+              <p>Usage duration, load profile and energy cost — all derived from the same open data stream.</p>
+              <div class="callout">From raw signals to actionable insight.</div>
+            </div>
+            <figure class="px-figure">
+              <img src="assets/lcms8060_analysis.png" alt="Usage analysis and high-resolution power consumption for the LCMS 8060">
+            </figure>
+          </div>
+        </div>
+        <style>
+          #slide-use-case-analysis .px-layout {
+            display: flex;
+            align-items: center;
+            gap: 44px;
+          }
+          #slide-use-case-analysis .px-text { flex: 0 0 26%; min-width: 0; }
+          #slide-use-case-analysis .px-figure { flex: 1 1 74%; margin: 0; }
+          #slide-use-case-analysis .px-figure img {
+            width: 100%;
+            max-height: 660px;
+            object-fit: contain;
+            margin: 0;
+          }
+        </style>
+      </section>
+
+      <!-- Slide 13: handover to the next talk -->
+      <section class="slide" id="slide-handover">
+        <div class="slide-body">
+          <div class="ho-wrap">
+            <div class="ho-tile">
+              <p class="ho-title">„Entwicklung einer Open-Source-Softwareplattform zur Verarbeitung heterogener Datenströme mittels Vibe-Coding“</p>
+              <p class="ho-name">Ricardo Cunha</p>
+            </div>
+            <p class="ho-sub">how it's done properly …</p>
+          </div>
+        </div>
+        <style>
+          #slide-handover .ho-wrap {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1.5em;
+            width: 100%;
+          }
+          #slide-handover .ho-tile {
+            max-width: 1180px;
+            background: #eef5fb;
+            border: 1px solid #cfe0f2;
+            border-radius: 16px;
+            padding: 34px 42px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .7em;
+          }
+          #slide-handover .ho-title {
+            margin: 0;
+            color: var(--blue);
+            font-size: 1.6em;
+            font-weight: 600;
+            line-height: 1.35;
+          }
+          #slide-handover .ho-name {
+            margin: 0;
+            color: var(--blue);
+            font-size: .68em;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            opacity: .72;
+          }
+          #slide-handover .ho-sub {
+            margin: 0;
+            color: #93a2b0;
+            font-size: .5em;
+          }
+        </style>
+      </section>
+
+      <!-- Keep this as the final slide. -->
+      <section class="slide thank-you-slide" id="slide-thank-you">
+        <h2></h2>
+        <style>
+          #slide-thank-you h2 {
+            position: static;
+            color: var(--blue);
+            font-size: 1.9em;
+            font-weight: 600;
+            line-height: 1.3;
+          }
+        </style>
+      </section>
+    </div>
+  </div>
+
+  <!-- Change the logo source and alt text here when using a different logo. -->
+  <template id="slide-chrome-template">
+    <div class="slide-chrome">
+      <img class="slide-logo" src="../assets/template/iuta-logo.png" alt="IUTA">
+      <div class="slide-footer">
+        <span class="metadata-left"></span>
+        <span class="center metadata-footer"></span>
+        <span class="number"></span>
+      </div>
+    </div>
+  </template>
+
+  <script src="../assets/template/vendor/reveal.js/reveal.js"></script>
+  <script src="../assets/template/vendor/highlight.js/highlight.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/javascript.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/r.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/python.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/cpp.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/shell.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/bash.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/rust.min.js"></script>
+  <script src="../assets/template/vendor/highlight.js/languages/json.min.js"></script>
+  <script>
+    hljs.registerLanguage('ttl', function (hljs) {
+      return {
+        name: 'Turtle',
+        aliases: ['turtle'],
+        contains: [
+          hljs.HASH_COMMENT_MODE,
+          { className: 'meta', begin: /@(?:prefix|base)\b/ },
+          { className: 'symbol', begin: /\ba\b/ },
+          hljs.QUOTE_STRING_MODE,
+          hljs.NUMBER_MODE,
+          { className: 'attr', begin: /[A-Za-z_][\w-]*:/ },
+          { className: 'link', begin: /<[^>]+>/ }
+        ]
+      };
+    });
+
+    document.querySelectorAll('pre.code-block code').forEach(function (block) {
+      hljs.highlightElement(block);
+    });
+
+    function metadata(name) {
+      var node = document.querySelector('meta[name="' + name + '"]');
+      return node ? node.content : '';
+    }
+
+    function addSlideChrome() {
+      var template = document.querySelector('#slide-chrome-template');
+      if (!template) return;
+      document.querySelectorAll('.reveal .slides section.slide:not(#title-slide):not(.thank-you-slide)').forEach(function (slide) {
+        if (slide.querySelector(':scope > .slide-chrome')) return;
+        var chrome = template.content.cloneNode(true);
+        var body = slide.querySelector(':scope > .slide-body');
+        slide.insertBefore(chrome, body || slide.children[1]);
+      });
+    }
+
+    addSlideChrome();
+
+    function resetTimedAnimation(slide) {
+      document.querySelectorAll('.timed-animation-demo').forEach(function (demo) {
+        demo.classList.remove('is-active');
+      });
+      if (!slide || slide.id !== 'timed-animation-slide') return;
+      slide.querySelector('.timed-animation-demo').classList.add('is-active');
+    }
+
+    var presentationMetadata = {
+      title: metadata('presentation-title'),
+      author: metadata('author'),
+      date: metadata('presentation-date'),
+      event: metadata('presentation-event'),
+      affiliation: metadata('presentation-affiliation'),
+      footer: [metadata('author'), metadata('author-email')].filter(Boolean).join(' | '),
+      thankYou: metadata('presentation-thank-you'),
+      thankYouSubtitle: metadata('presentation-thank-you-subtitle'),
+      projectLink: metadata('presentation-project-link')
+    };
+
+    function setText(selector, value) {
+      var node = document.querySelector(selector);
+      if (node) node.textContent = value;
+    }
+
+    document.title = presentationMetadata.title;
+    setText('#title-slide .title', presentationMetadata.title);
+    setText('#title-slide .title-date', presentationMetadata.date);
+    setText('#title-slide .title-event', presentationMetadata.event);
+    setText('#title-slide .title-speakers', presentationMetadata.author);
+    setText('#title-slide .title-affiliations', presentationMetadata.affiliation);
+    setText('.thank-you-slide h2', presentationMetadata.thankYou);
+    setText('.thank-you-slide p', presentationMetadata.thankYouSubtitle);
+    setText('.thank-you-slide .thank-you-visit span', presentationMetadata.thankYouSubtitle);
+    setText('.thank-you-slide .thank-you-visit strong', presentationMetadata.projectLink);
+    setText('.thank-you-slide .thank-you-author strong', presentationMetadata.footer);
+    setText('.thank-you-slide .thank-you-author span', presentationMetadata.affiliation);
+    document.querySelectorAll('.metadata-left').forEach(function (node) {
+      node.textContent = [presentationMetadata.date, presentationMetadata.event].filter(Boolean).join(' | ');
+    });
+    document.querySelectorAll('.metadata-footer').forEach(function (node) {
+      node.textContent = presentationMetadata.footer;
+    });
+
+    Reveal.initialize({
+      controls: false, progress: false, hash: true, history: true,
+      keyboard: true, overview: false, view: 'scroll', center: false, transition: 'none',
+      slideNumber: 'c/t', width: 1920, height: 1080, margin: 0.04
+    });
+
+    function syncSlideNumber() {
+      document.querySelectorAll('.slide-footer .number').forEach(function (node) {
+        node.textContent = Reveal.getIndices().h + 1;
+      });
+    }
+    Reveal.on('ready', syncSlideNumber);
+    Reveal.on('slidechanged', syncSlideNumber);
+    Reveal.on('ready', function (event) {
+      resetTimedAnimation(event.currentSlide);
+    });
+    Reveal.on('slidechanged', function (event) {
+      resetTimedAnimation(event.currentSlide);
+    });
+  </script>
+</body>
+
+</html>
