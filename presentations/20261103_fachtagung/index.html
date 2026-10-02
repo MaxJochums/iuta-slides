@@ -15,7 +15,7 @@
     <meta name="presentation-affiliation" content="IUTA e.V.">
     <meta name="presentation-thank-you" content="Thank you for your attention">
     <meta name="presentation-thank-you-subtitle" content="">
-    <meta name="presentation-project-link" content="">
+    <meta name="presentation-project-link" content="https://github.com/MaxJochums/iuta-slides">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="../assets/template/vendor/reveal.js/reset.css">
@@ -663,6 +663,7 @@
           <p class="ty-title"></p>
           <div class="ty-credentials">
             <span class="ty-name"></span>
+            <a class="ty-repo" href="#"></a>
             <span class="ty-email"></span>
             <span class="ty-affiliation"></span>
           </div>
@@ -694,6 +695,8 @@
             text-align: center;
           }
           #slide-thank-you .ty-name { color: #274560; font-size: .88em; font-weight: 700; }
+          #slide-thank-you .ty-repo { color: var(--blue); font-size: .72em; text-decoration: none; }
+          #slide-thank-you .ty-repo:hover { text-decoration: underline; }
           #slide-thank-you .ty-email { color: var(--blue); font-size: .72em; }
           #slide-thank-you .ty-affiliation { color: #7a8b9c; font-size: .66em; }
         </style>
@@ -797,6 +800,11 @@
     setText('#slide-thank-you .ty-name', presentationMetadata.author);
     setText('#slide-thank-you .ty-email', metadata('author-email'));
     setText('#slide-thank-you .ty-affiliation', presentationMetadata.affiliation);
+    var repoNode = document.querySelector('#slide-thank-you .ty-repo');
+    if (repoNode && presentationMetadata.projectLink) {
+      repoNode.href = presentationMetadata.projectLink;
+      repoNode.textContent = presentationMetadata.projectLink.replace(/^https?:\/\//, '');
+    }
     document.querySelectorAll('.metadata-left').forEach(function (node) {
       node.textContent = [presentationMetadata.date, presentationMetadata.event].filter(Boolean).join(' | ');
     });
