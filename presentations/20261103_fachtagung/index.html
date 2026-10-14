@@ -15,7 +15,7 @@
     <meta name="presentation-affiliation" content="IUTA e.V.">
     <meta name="presentation-thank-you" content="Thank you for your attention">
     <meta name="presentation-thank-you-subtitle" content="">
-    <meta name="presentation-project-link" content="https://github.com/MaxJochums/iuta-slides">
+    <meta name="presentation-project-link" content="https://github.com/MaxJochums">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="../assets/template/vendor/reveal.js/reset.css">
@@ -410,6 +410,105 @@
             max-width: 100%;
             object-fit: contain;
             margin: 0;
+          }
+        </style>
+      </section>
+
+      <!-- Slide: brownfield devices - many instruments still have no LADS support -->
+      <section class="slide" id="slide-brownfield">
+        <h2>Brownfield devices</h2>
+        <div class="slide-body">
+          <div class="bf-grid">
+            <figure class="bf-card">
+              <img src="assets/brownfield_pipette.png" alt="Pipette with Bluetooth interface">
+              <figcaption class="bf-label"><strong>Pipette</strong><span>Bluetooth</span></figcaption>
+            </figure>
+            <figure class="bf-card">
+              <img src="assets/brownfield_centrifuge.png" alt="Centrifuge with Modbus RTU interface">
+              <figcaption class="bf-label"><strong>Centrifuge</strong><span>Modbus RTU</span></figcaption>
+            </figure>
+            <figure class="bf-card">
+              <img src="assets/brownfield_balance.png" alt="Balance with RS232 serial interface">
+              <figcaption class="bf-label"><strong>Balance</strong><span>RS232 / Serial</span></figcaption>
+            </figure>
+            <figure class="bf-card">
+              <img src="assets/brownfield_autosampler.png" alt="Autosampler with proprietary protocol">
+              <figcaption class="bf-label"><strong>Autosampler</strong><span>Proprietary protocol</span></figcaption>
+            </figure>
+          </div>
+          <div class="bf-band" aria-hidden="true"></div>
+          <div class="bf-diag" aria-hidden="true">NO LADS OPC UA</div>
+        </div>
+        <style>
+          #slide-brownfield .bf-grid {
+            align-self: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 22px;
+            width: 100%;
+            max-width: 1620px;
+            height: 100%;
+          }
+          #slide-brownfield .bf-card {
+            position: relative;
+            margin: 0;
+            border: 2px solid #d7e3ee;
+            border-radius: 18px;
+            background: #fbfdff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+          }
+          #slide-brownfield .bf-card img {
+            height: 232px;
+            width: auto;
+            max-width: 72%;
+            object-fit: contain;
+            margin: 0;
+          }
+          #slide-brownfield .bf-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+            z-index: 6;
+            padding: .45em 0;
+            background: rgba(255, 255, 255, .94);
+            border-top: 1px solid #e3edf6;
+            border-bottom: 1px solid #e3edf6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .08em;
+          }
+          #slide-brownfield .bf-label strong { color: #1a4f8a; font-size: .8em; font-weight: 700; }
+          #slide-brownfield .bf-label span { color: #2b6cb0; font-size: .6em; }
+          #slide-brownfield .bf-band {
+            position: absolute;
+            left: -4%;
+            top: 50%;
+            width: 108%;
+            height: 190px;
+            transform: translateY(-50%) rotate(-17deg);
+            background: rgba(255, 255, 255, .6);
+            z-index: 4;
+            pointer-events: none;
+          }
+          #slide-brownfield .bf-diag {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-17deg);
+            z-index: 5;
+            color: #e2001a;
+            font-size: 4.2em;
+            font-weight: 700;
+            letter-spacing: .03em;
+            white-space: nowrap;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, .85);
+            pointer-events: none;
           }
         </style>
       </section>
