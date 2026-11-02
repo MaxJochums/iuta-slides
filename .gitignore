@@ -10,3 +10,7 @@ tmp/
 
 # Local slides access secret (never commit)
 .env.slides
+
+# Local backups and per-deck working backups
+backups/
+presentations/*/backup/
